@@ -1,0 +1,24 @@
+---
+# Select the type of API version and type of service/object
+apiVersion: v1
+kind: Service
+
+# Metadata for name
+metadata:
+  name: nginx-svc
+  namespace: default #sre
+# Specification to include ports Selector to connect to the ?
+spec:
+  ports:
+  - nodePort: 30001 # range is 30000-32768
+    port: 80
+
+
+    targetPort: 80
+
+  # lets define the selector and label to connect to nginx deploment
+  selector:
+    app: nginx 
+
+  # Creating NodePort type of deployement 
+  type: NodePort 
