@@ -1,3 +1,28 @@
+# Select the type of API version and type of service/object
+apiVersion: v1
+kind: Service
+
+# Metadata for name
+metadata:
+  name: node-svc
+  namespace: default #sre
+# Specification to include ports Selector to connect to the ?
+spec:
+  ports:
+  - nodePort: 30002 # range is 30000-32768
+    port: 80
+
+
+    targetPort: 3000
+
+  # lets define the selector and label to connect to nginx deploment
+  selector:
+    app: node 
+
+  # Creating NodePort type of deployement 
+  type: NodePort 
+  
+---
 apiVersion: apps/v1 # which api to use for deployment
 
 kind: Deployment # what kind of service/object do you want to create?
@@ -23,4 +48,8 @@ spec:
       - name: node
         image: reiscodes/sparta_app:v2
         ports:
-        - containerPort: 80
+        - containerPort: 3000
+        env:
+        - name: MONGO_URL
+          value: mongodb://mongodb:27017/posts
+        imagePullPolicy: Always

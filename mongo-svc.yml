@@ -4,20 +4,17 @@ kind: Service
 
 # Metadata for name
 metadata:
-  name: node-svc
+  name: mongodb-svc
   namespace: default #sre
 # Specification to include ports Selector to connect to the ?
 spec:
   ports:
-  - nodePort: 30002 # range is 30000-32768
-    port: 80
+   # expose the ports
+  - port: 27017
 
 
-    targetPort: 3000
+    targetPort: 27017
 
   # lets define the selector and label to connect to nginx deploment
   selector:
-    app: node 
-
-  # Creating NodePort type of deployement 
-  type: NodePort 
+    app: mongodb 
