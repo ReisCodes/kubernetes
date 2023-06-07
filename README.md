@@ -49,7 +49,7 @@ spec:
     spec: 
       containers:
       - name: nginx
-        image: jakegillatt/sparta-app:jake_app
+        image: reiscodes/sparta-app:v2
         ports:
         - containerPort: 80
 
